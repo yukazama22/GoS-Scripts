@@ -23,7 +23,7 @@ function AfterObjectLoopEvent(myHer0)
 		CastSpell(myHero, _R)
 	end
 	if CanUseSpell(myHero, _E) == READY and IsInDistance(target, 290) then
-		CastTargetSpell(target, _E)
+		CastTargetSpell(myHero, _E)
 	end
 
        end
