@@ -1,18 +1,12 @@
-require("Inspired")
-require("IMenu")
-require("IWalk")
-
 AddInfo("Zed", "Zed:")
 AddButton("Q", "Use Q", true)
 AddButton("E", "Use E", true)
 AddButton("R", "Use R", true)
 
-function AfterObjectLoopEvent(myHer0)
+AddAfterObjectLoopEvent(function(myHero)
 	DrawMenu()
 	IWalk()
 	AutoIgnite()
-	myHero = myHer0
-	myHeroPos = GetOrigin(myHero)
 	DrawText("Evolved Zed is Loaded, and this is my first Script EVER",24,0,0,0xffff0000);
 	if GetKeyValue("Combo") then
 	local unit = GetCurrentTarget()
@@ -40,6 +34,6 @@ function AfterObjectLoopEvent(myHer0)
        end
             end
         end
-end
+end)
 
 
