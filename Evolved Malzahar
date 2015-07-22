@@ -6,7 +6,6 @@ AddButton("R", "Use R", true)
 AddButton("C", "Use C to Harass", true)
 
 OnLoop(function(myHero)
-	DrawMenu()
 	IWalk()
 	AutoIgnite()
 	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
