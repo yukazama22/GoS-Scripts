@@ -1,0 +1,164 @@
+AddInfo("Malzahar", "Malzahar")
+AddButton("Q", "Use Q", true)
+AddButton("W", "Use W", true)
+AddButton("E", "Use E", true)
+AddButton("R", "Use R", true)
+AddButton("C", "Use C to Harass", true)
+
+OnLoop(function(myHero)
+	DrawMenu()
+	IWalk()
+	AutoIgnite()
+	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
+	if GetKeyValue("Combo") then
+	local currmana = GetCurrentMana(myHero)
+	local unit = GetCurrentTarget()
+		if ValidTarget(unit, 1000) then
+		if GetCurrentMana(myHero) >= qcost + wcost + ecost + rcost then
+
+			if GetButtonValue("E") then
+			if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, 450) then
+			CastTargetSpell(unit, _E)
+
+	    -- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1400,250,900,400,false,true)
+			if GetButtonValue("Q") then
+			if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPredPos.z)
+
+			if GetButtonValue("W") then
+			if CanUseSpell(myHero, _W) == READY and IsInDistance(unit, 800) then
+			CastTargetSpell(unit, _W)
+
+			if GetButtonValue("R") then
+			if CanUseSpell(myHero, _R) == READY and IsInDistance(unit, 700) then
+			CastTargetSpell(unit, _R)
+
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+			end
+		end
+		end
+	end
+	if GetKeyValue(0x43) then
+
+			if GetButtonValue("E") then
+			if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, 450) then
+			CastTargetSpell(unit, _E)
+			end
+			end
+			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1400,250,900,400,false,true)
+			if GetButtonValue("Q") then
+			if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPredPos.z)
+			end
+			end
+	end
+
+end)
+
+
+function qcost()
+
+	if GetCastLevel(myHero, _Q) == 0 then
+		return 0
+	end
+
+	if GetCastLevel(myHero, _Q) == 1 then
+		return 80
+	end
+
+	if GetCastLevel(myHero, _Q) == 2 then
+		return 85
+	end
+
+	if GetCastLevel(myHero, _Q) == 3 then
+		return 90
+	end
+
+	if GetCastLevel(myHero, _Q) == 4 then
+		return 95
+	end
+
+	if GetCastLevel(myHero, _Q) == 5 then
+		return 100
+	end
+end
+
+function wcost()
+
+	if GetCastLevel(myHero, _W) == 0 then
+		return 0
+	end
+
+	if GetCastLevel(myHero, _W) == 1 then
+		return 90
+	end
+
+	if GetCastLevel(myHero, _W) == 2 then
+		return 95
+	end
+
+	if GetCastLevel(myHero, _W) == 3 then
+		return 100
+	end
+
+	if GetCastLevel(myHero, _W) == 4 then
+		return 105
+	end
+
+	if GetCastLevel(myHero, _W) == 5 then
+		return 110
+	end
+end
+
+function ecost()
+
+	if GetCastLevel(myHero, _E) == 0 then
+		return 0
+	end
+
+	if GetCastLevel(myHero, _E) == 1 then
+		return 60
+	end
+
+	if GetCastLevel(myHero, _E) == 2 then
+		return 75
+	end
+
+	if GetCastLevel(myHero, _E) == 3 then
+		return 90
+	end
+
+	if GetCastLevel(myHero, _E) == 4 then
+		return 105
+	end
+
+	if GetCastLevel(myHero, _E) == 5 then
+		return 120
+	end
+end
+
+function rcost()
+
+	if GetCastLevel(myHero, _Q) == 0 then
+		return 0
+	end
+
+	if GetCastLevel(myHero, _Q) == 1 then
+		return 100
+	end
+
+	if GetCastLevel(myHero, _Q) == 2 then
+		return 100
+	end
+
+	if GetCastLevel(myHero, _Q) == 3 then
+		return 100
+	end
+end
