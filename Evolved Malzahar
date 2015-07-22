@@ -1,7 +1,7 @@
 AddInfo("Malzahar", "Malzahar")
-AddButton("Q", "Use Q", true)
+AddButton("Q", "Use Q In Combo / Harass", true)
 AddButton("W", "Use W", true)
-AddButton("E", "Use E", true)
+AddButton("E", "Use E In Como / Harass", true)
 AddButton("R", "Use R", true)
 AddButton("C", "Use C to Harass", true)
 
