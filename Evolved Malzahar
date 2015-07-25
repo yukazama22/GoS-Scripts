@@ -1,11 +1,12 @@
 AddInfo("Malzahar", "Malzahar")
-AddButton("Q", "Use Q In Combo / Harass", true)
+AddButton("Q", "Use Q", true)
 AddButton("W", "Use W", true)
-AddButton("E", "Use E In Como / Harass", true)
+AddButton("E", "Use E", true)
 AddButton("R", "Use R", true)
-AddButton("C", "Use C to Harass", true)
+
 
 OnLoop(function(myHero)
+	DrawMenu()
 	IWalk()
 	AutoIgnite()
 	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
@@ -13,21 +14,28 @@ OnLoop(function(myHero)
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
-		if GetCurrentMana(myHero) >= qcost + wcost + ecost + rcost then
+		if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
 
 			if GetButtonValue("E") then
 			if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, 450) then
 			CastTargetSpell(unit, _E)
+			end
+			end
 
-	    -- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
-			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1400,250,900,400,false,true)
 			if GetButtonValue("Q") then
-			if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
-			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPredPos.z)
+			-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,900,85,false,true)
+			if CanUseSpell(myHero, _Q) == READY and QPred.HitChange == 1 then
+			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+			end
+			end
 
 			if GetButtonValue("W") then
-			if CanUseSpell(myHero, _W) == READY and IsInDistance(unit, 800) then
-			CastTargetSpell(unit, _W)
+			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,800,250,false,true)
+			if CanUseSpell(myHero, _W) == READY and WPred.HitChange == 1 then
+			CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+			end
+			end
 
 			if GetButtonValue("R") then
 			if CanUseSpell(myHero, _R) == READY and IsInDistance(unit, 700) then
@@ -35,32 +43,10 @@ OnLoop(function(myHero)
 
 			end
 			end
-			end
-			end
-			end
-			end
-			end
-			end
 		end
 		end
 	end
-	if GetKeyValue(0x43) then
-
-			if GetButtonValue("E") then
-			if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, 450) then
-			CastTargetSpell(unit, _E)
-			end
-			end
-			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1400,250,900,400,false,true)
-			if GetButtonValue("Q") then
-			if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
-			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPredPos.z)
-			end
-			end
-	end
-
 end)
-
 
 function qcost()
 
