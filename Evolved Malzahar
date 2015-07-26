@@ -14,7 +14,7 @@ OnLoop(function(myHero)
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
-		if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
+
 
 			if GetButtonValue("E") then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
@@ -22,34 +22,64 @@ OnLoop(function(myHero)
 			end
 			end
 
-				if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
-				if ValidTarget(unit, GetCastRange(myHero, _Q)) then
-				local QPred = GetPredictionForPlayer(GetMyHeroPos,unit, GetMoveSpeed(unit), math.huge, 1000, GetCastRange(myHero, _Q), 85, false, true)
-				if QPred.HitChance == 1 then
-					CastSkillShot(_Q, QPred.PredPos.x, QPred.PredPos.y, QPred.PredPos.z)
-				end
-				end
-				end
+			if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
+			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _Q),85,false,true)
+			if QPred.HitChance == 1 then
+			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+			end
+			end
+
 
 			if CanUseSpell(myHero, _W) == READY and GetButtonValue("W") then
-			if ValidTarget(unit, GetCastRange(myHero, _W)) then
-			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,800,250,false,true)
-			if WPred.HitChange == 1 then
+			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _W),250,false,true)
+			if WPred.HitChance == 1 then
 			CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
 			end
 			end
-			end
+
 
 			if GetButtonValue("R") then
-			if CanUseSpell(myHero, _R) == READY and IsInDistance(unit, 700) then
+			if CanUseSpell(myHero, _R) == READY and GetCastRange(myHero, _R) then
 			CastTargetSpell(unit, _R)
-
 			end
 			end
-		end
 		end
 	end
 end)
+
+OnProcessSpell(function(unit, spell)
+
+
+			   if unit and unit == myHero and spell then
+
+
+
+
+
+                if spell.name:lower():find("malzaharnethergrasp") then
+
+
+
+
+
+                waitTickCount = GetTickCount() + 2500
+
+
+
+
+
+				end
+
+
+
+
+
+				end
+
+
+end)
+
+
 function qcost()
 
 	if GetCastLevel(myHero, _Q) == 0 then
@@ -149,4 +179,3 @@ function rcost()
 		return 100
 	end
 end
-
