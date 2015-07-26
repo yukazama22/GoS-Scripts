@@ -6,40 +6,43 @@ AddButton("R", "Use R", true)
 
 
 OnLoop(function(myHero)
-	DrawMenu()
-	IWalk()
 	AutoIgnite()
 	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
 	if GetKeyValue("Combo") then
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
-
-
 			if GetButtonValue("E") then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
+			if isRcasting then return end
 			CastTargetSpell(unit, _E)
 			end
 			end
 
+
 			if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
 			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _Q),85,false,true)
 			if QPred.HitChance == 1 then
+			if isRcasting then return end
 			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
 			end
 			end
 
 
+
 			if CanUseSpell(myHero, _W) == READY and GetButtonValue("W") then
 			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _W),250,false,true)
 			if WPred.HitChance == 1 then
+			if isRcasting then return end
 			CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
 			end
 			end
 
 
+
 			if GetButtonValue("R") then
 			if CanUseSpell(myHero, _R) == READY and GetCastRange(myHero, _R) then
+			HoldPosition()
 			CastTargetSpell(unit, _R)
 			end
 			end
@@ -47,23 +50,23 @@ OnLoop(function(myHero)
 	end
 end)
 
+
 OnProcessSpell(function(unit, spell)
 
 
-			   if unit and unit == myHero and spell then
+                if unit and unit == myHero and spell then
 
 
 
 
 
-                if spell.name:lower():find("malzaharnethergrasp") then
+                if spell.name:lower():find("alzaharnethergrasp") then
 
 
 
 
 
                 waitTickCount = GetTickCount() + 2500
-
 
 
 
