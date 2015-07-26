@@ -8,10 +8,15 @@ AddButton("R", "Use R", true)
 OnLoop(function(myHero)
 	AutoIgnite()
 	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
+	if KeyIsDown(string.byte("C")) then
+		Harrass()
+	end
+
 	if GetKeyValue("Combo") then
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
+		if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
 			if GetButtonValue("E") then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
 			if isRcasting then return end
@@ -41,14 +46,37 @@ OnLoop(function(myHero)
 
 
 			if GetButtonValue("R") then
-			if CanUseSpell(myHero, _R) == READY and GetCastRange(myHero, _R) then
-			HoldPosition()
+			if GetCastRange(myHero, _R) and CanUseSpell(myHero, _Q) ~= READY and CanUseSpell(myHero, _W) ~= READY and CanUseSpell(myHero, _E) ~= READY and CanUseSpell(myHero, _R) ~= ONCOOLDOWN then
 			CastTargetSpell(unit, _R)
 			end
 			end
 		end
 	end
+	end
 end)
+
+function Harrass()
+	local unit = GetCurrentTarget()
+		if ValidTarget(unit, 1000) then
+
+		if GetButtonValue("E") then
+			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
+			if isRcasting then return end
+			CastTargetSpell(unit, _E)
+			end
+			end
+
+
+			if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
+			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _Q),85,false,true)
+			if QPred.HitChance == 1 then
+			if isRcasting then return end
+			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+			end
+			end
+	end
+end
+
 
 
 OnProcessSpell(function(unit, spell)
