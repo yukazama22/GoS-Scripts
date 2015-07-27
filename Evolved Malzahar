@@ -37,7 +37,6 @@ OnLoop(function(myHero)
 			if CanUseSpell(myHero, _W) == READY and Config.W then
 			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _W),250,false,true)
 			if WPred.HitChance == 1 then
-			if isRcasting then return end
 			CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
 			end
 			end
