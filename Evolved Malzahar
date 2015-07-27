@@ -1,8 +1,8 @@
-AddInfo("Malzahar", "Malzahar")
-AddButton("Q", "Use Q", true)
-AddButton("W", "Use W", true)
-AddButton("E", "Use E", true)
-AddButton("R", "Use R", true)
+Config = scriptConfig("IMalzahar", "Malzahar.lua")
+Config.addParam("Q", "Use Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use W", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("E", "Use E", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("R", "Use R", SCRIPT_PARAM_ONOFF, true)
 
 
 OnLoop(function(myHero)
@@ -11,12 +11,11 @@ OnLoop(function(myHero)
 	if KeyIsDown(string.byte("C")) then
 		Harrass()
 	end
-
-	if GetKeyValue("Combo") then
+	if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
+	if IWalkConfig.Combo then
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
-		if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
 			if GetButtonValue("E") then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
 			if isRcasting then return end
@@ -25,7 +24,7 @@ OnLoop(function(myHero)
 			end
 
 
-			if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
+			if CanUseSpell(myHero, _Q) == READY and Config.Q then
 			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _Q),85,false,true)
 			if QPred.HitChance == 1 then
 			if isRcasting then return end
@@ -35,7 +34,7 @@ OnLoop(function(myHero)
 
 
 
-			if CanUseSpell(myHero, _W) == READY and GetButtonValue("W") then
+			if CanUseSpell(myHero, _W) == READY and Config.W then
 			local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _W),250,false,true)
 			if WPred.HitChance == 1 then
 			if isRcasting then return end
@@ -45,32 +44,35 @@ OnLoop(function(myHero)
 
 
 
-			if GetButtonValue("R") then
+			if Config.R then
 			if GetCastRange(myHero, _R) and CanUseSpell(myHero, _Q) ~= READY and CanUseSpell(myHero, _W) ~= READY and CanUseSpell(myHero, _E) ~= READY and CanUseSpell(myHero, _R) ~= ONCOOLDOWN then
+			HoldPosition()
 			CastTargetSpell(unit, _R)
 			end
 			end
 		end
 	end
-	end
+end
 end)
+
+
+
+
 
 function Harrass()
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
 
-		if GetButtonValue("E") then
+		if Config.E then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
-			if isRcasting then return end
 			CastTargetSpell(unit, _E)
 			end
 			end
 
 
-			if CanUseSpell(myHero, _Q) == READY and GetButtonValue("Q") then
+			if CanUseSpell(myHero, _Q) == READY and Config.Q then
 			local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1000,GetCastRange(myHero, _Q),85,false,true)
 			if QPred.HitChance == 1 then
-			if isRcasting then return end
 			CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
 			end
 			end
