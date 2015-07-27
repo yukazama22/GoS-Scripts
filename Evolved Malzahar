@@ -194,19 +194,19 @@ end
 
 function rcost()
 
-	if GetCastLevel(myHero, _Q) == 0 then
+	if GetCastLevel(myHero, _R) == 0 then
 		return 0
 	end
 
-	if GetCastLevel(myHero, _Q) == 1 then
+	if GetCastLevel(myHero, _R) == 1 then
 		return 100
 	end
 
-	if GetCastLevel(myHero, _Q) == 2 then
+	if GetCastLevel(myHero, _R) == 2 then
 		return 100
 	end
 
-	if GetCastLevel(myHero, _Q) == 3 then
+	if GetCastLevel(myHero, _R) == 3 then
 		return 100
 	end
 end
