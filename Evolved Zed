@@ -12,8 +12,10 @@ OnLoop(function(myHero)
 	if ValidTarget(unit, 900) then
 
 		if Config.R then
-		if CanUseSpell(myHero, _R) == READY and IsInDistance(unit, 625) then
+		if unit ~= nil then
+		if CanUseSpell(myHero, _R) == READY and CanUseSpell(myHero, _E) == READY and rdmg() >= GetCurrentHP(unit) and IsInDistance(unit, 625)  then
 			CastTargetSpell(unit, _R)
+		end
 		end
 
 	 -- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
@@ -31,7 +33,64 @@ OnLoop(function(myHero)
 	end
        end
             end
-        end
+end
 end)
+
+function qdmg()
+	if GetCastLevel(myHero, _Q) == 0 then
+		return 0
+	end
+	if GetCastLevel(myHero, _Q) == 1 then
+		return 75 + (GetBonusDmg(myHero)/100*100)
+	end
+	if GetCastLevel(myHero, _Q) == 2 then
+		return 115 + (GetBonusDmg(myHero)/100*100)
+	end
+	if GetCastLevel(myHero, _Q) == 3 then
+		return 155 + (GetBonusDmg(myHero)/100*100)
+	end
+	if GetCastLevel(myHero, _Q) == 4 then
+		return 195 + (GetBonusDmg(myHero)/100*100)
+	end
+	if GetCastLevel(myHero, _Q) == 5 then
+		return 235 + (GetBonusDmg(myHero)/100*100)
+	end
+end
+
+function edmg()
+	if GetCastLevel(myHero, _E) == 0 then
+		return 0
+	end
+	if GetCastLevel(myHero, _E) == 1 then
+		return 60 + (GetBonusDmg(myHero)/100*80)
+	end
+	if GetCastLevel(myHero, _E) == 2 then
+		return 90 + (GetBonusDmg(myHero)/100*80)
+	end
+	if GetCastLevel(myHero, _E) == 3 then
+		return 120 + (GetBonusDmg(myHero)/100*80)
+	end
+	if GetCastLevel(myHero, _E) == 4 then
+		return 150 + (GetBonusDmg(myHero)/100*80)
+	end
+	if GetCastLevel(myHero, _E) == 5 then
+		return 180 + (GetBonusDmg(myHero)/100*80)
+	end
+end
+
+function rdmg()
+	if GetCastLevel(myHero, _R) == 0 then
+		return 0
+	end
+	if GetCastLevel(myHero, _R) == 1 then
+		return 30 + (GetBonusDmg(myHero)/100*100) + qdmg() + edmg()
+	end
+	if GetCastLevel(myHero, _R) == 2 then
+		return 35 + (GetBonusDmg(myHero)/100*100) + qdmg() + edmg()
+	end
+	if GetCastLevel(myHero, _R) == 3 then
+		return 50 + (GetBonusDmg(myHero)/100*100) + qdmg() + edmg()
+	end
+end
 
 
