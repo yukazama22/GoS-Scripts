@@ -13,7 +13,7 @@ OnLoop(function(myHero)
 
 		if Config.R then
 		if unit ~= nil then
-		if CanUseSpell(myHero, _R) == READY and CanUseSpell(myHero, _E) == READY and rdmg() >= GetCurrentHP(unit) and IsInDistance(unit, 625)  then
+		if CanUseSpell(myHero, _R) == READY and rdmg() >= GetCurrentHP(unit) and IsInDistance(unit, 625)  then
 			CastTargetSpell(unit, _R)
 		end
 		end
