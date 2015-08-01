@@ -23,11 +23,11 @@ if ValidTarget(unit, 1000) then
 	end
 -- Use Tristana Q
 	if Config.Q then
-		if CanUseSpell(myHero, _Q) == READY and CanUseSpell(myHero, _W) ~= READY and IsInDistance(unit, 543) then
+		if CanUseSpell(myHero, _Q) == READY and CanUseSpell(myHero, _W) ~= READY and IsInDistance(unit, GetRange(myHero)) then
 		CastTargetSpell(myHero, _Q)
 		end
 	end
--- Use Tristana R if Target is Kileable
+-- Use Tristana R if Target if can kill the target
 	if Config.R then
 		if CanUseSpell(myHero, _R) == READY and rdmg() > GetCurrentHP(unit) + GetHPRegen(unit) and IsInDistance(unit, GetCastRange(myHero, _R)) then
 		CastTargetSpell(unit, _R)
@@ -35,14 +35,14 @@ if ValidTarget(unit, 1000) then
 	end
 
 end
--- LanceClear Not Working ATM
+--[[ LanceClear Not Working ATM
 if IWalkConfig.Laneclear then
 	if Config.Q then
 		if CanUseSpell(myHero, _Q) == READY then
 		CastSpell(myHero, _Q)
 end
 		end
-	end
+	end]]
 
 end
 end)
