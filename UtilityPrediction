@@ -80,7 +80,7 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
-if GetObjectName(GetMyHero()) == "Anivia" then
+--[[if GetObjectName(GetMyHero()) == "Anivia" then
 -- Menu
 Config = scriptConfig("IAnivia", "Anivia")
 Config.addParam("Q", "Use Anivia Q", SCRIPT_PARAM_ONOFF, true)
@@ -102,7 +102,7 @@ local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),850,
 end
 end
 end)
-end
+end]]
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
