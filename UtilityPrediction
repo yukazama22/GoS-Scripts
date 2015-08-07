@@ -1,5 +1,5 @@
 --Prediction script to all champions with skillshoots, and some Mini Combos. Made by Asserio
--- Champions on the script = 8
+-- Champions on the script = 12
 
 
 -----------------------------------------------------------------------------------
@@ -84,7 +84,6 @@ if GetObjectName(GetMyHero()) == "Anivia" then
 -- Menu
 Config = scriptConfig("IAnivia", "Anivia")
 Config.addParam("Q", "Use Anivia Q", SCRIPT_PARAM_ONOFF, true)
-Config.addParam("R", "Use Anivia R", SCRIPT_PARAM_ONOFF, true)
 -- start
 OnLoop(function(myHero)
 local unit = GetCurrentTarget()
@@ -131,7 +130,7 @@ if IWalkConfig.Harass then
 		end
 	end
 
-	 -- Annie W
+-- Annie W
 	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
 local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,250,625,80,false,true)
 	if Config.W then
@@ -234,6 +233,74 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Brand" then
+-- Menu
+Config = scriptConfig("IBrand", "Brand")
+Config.addParam("Q", "Use Brand Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use Brand W", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("E", "Use Brand E", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("R", "Use Brand R", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harrass then
+-- Brand Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1100,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Brand W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,850,900,240,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+end
+
+if IWalkConfig.Combo then
+-- Brand E
+	if Config.E then
+		if CanUseSpell(myHero, _E) == READY and IsInDistance(unit, GetCastRange(myHero, _E)) then
+		CastTargetSpell(unit, _E)
+		end
+	end
+
+-- Brand Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1100,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Brand W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,850,900,240,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+
+-- Brand R
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and CanUseSpell(myHero, _Q) ~= READY and CanUseSpell(myHero, _W) ~= READY and CanUseSpell(myHero, _E) ~= READY and IsInDistance(unit, GetCastRange(myHero, _R)) then
+		CastTargetSpell(unit, _R)
+		end
+	end
+
+end
+end
+end)
+end
 
 
 -----------------------------------------------------------------------------------
@@ -243,6 +310,29 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Braum" then
+-- Menu
+Config = scriptConfig("IBraum", "Braum")
+Config.addParam("Q", "Use Braum Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harrass then
+
+-- Braum Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1700,250,1050,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -251,6 +341,30 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Caitlyn" then
+-- Menu
+Config = scriptConfig("ICaitlyn", "Caitlyn")
+Config.addParam("Q", "Use Caitlyn Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1400) then
+if IWalkConfig.Harrass then
+
+-- Caitlyn Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2200,625,1300,90,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end)
+end
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -275,6 +389,44 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Corki" then
+-- Menu
+Config = scriptConfig("ICorki", "Corki")
+Config.addParam("Q", "Use Corki Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("R", "Use Corki R", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1500) then
+if IWalkConfig.Harrass then
+
+ -- Corki R
+ if GetCastName(myHero, _R) == "MissileBarrage" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,200,1300,40,true,true)
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and RPred.HitChance == 1 then
+	CastSkillShot(_R,RPred.PredPos.x,RPred.PredPos.y,RPred.PredPos.z)
+		end
+	end
+
+-- Corki MissileBarrage 2
+ if GetCastName(myHero, _R) == "MissileBarrage2" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,200,1500,40,true,true)
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and RPred.HitChance == 1 then
+	CastSkillShot(_R,RPred.PredPos.x,RPred.PredPos.y,RPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end
+end
+end)
+end
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
