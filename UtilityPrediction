@@ -1,6 +1,16 @@
 --Prediction script to all champions with skillshoots, and some Mini Combos. Made by Asserio
--- Champions on the script = 12
+-- Champions on the script = 15
 
+-- PrintChat
+local info = "Prediction Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.1"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -327,7 +337,7 @@ Config.addParam("Q", "Use Braum Q", SCRIPT_PARAM_ONOFF, true)
 OnLoop(function(myHero)
 local unit = GetCurrentTarget()
 if ValidTarget(unit, 1100) then
-if IWalkConfig.Harrass then
+if IWalkConfig.Harass then
 
 -- Braum Q
 	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
@@ -358,7 +368,7 @@ Config.addParam("Q", "Use Caitlyn Q", SCRIPT_PARAM_ONOFF, true)
 OnLoop(function(myHero)
 local unit = GetCurrentTarget()
 if ValidTarget(unit, 1400) then
-if IWalkConfig.Harrass then
+if IWalkConfig.Harass then
 
 -- Caitlyn Q
 	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
@@ -386,11 +396,33 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
--------------------------------ChoGath Prediction----------------------------------
+-------------------------------Cho'Gath Prediction----------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Chogath" then
+-- Menu
+Config = scriptConfig("IChogath", "Chogath")
+Config.addParam("Q", "Use ChoGath Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1000) then
+if IWalkConfig.Harass then
 
+-- Cho'Gath Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,1200,950,250,false,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -398,7 +430,7 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
---[[if GetObjectName(GetMyHero()) == "Corki" then
+if GetObjectName(GetMyHero()) == "Corki" then
 -- Menu
 Config = scriptConfig("ICorki", "Corki")
 Config.addParam("R", "Use Corki R", SCRIPT_PARAM_ONOFF, true)
@@ -406,7 +438,7 @@ Config.addParam("R", "Use Corki R", SCRIPT_PARAM_ONOFF, true)
 OnLoop(function(myHero)
 local unit = GetCurrentTarget()
 if ValidTarget(unit, 1500) then
-if IWalkConfig.Harrass then
+if IWalkConfig.Harass then
 
 if GetCastName(myHero, _R) == "MissileBarrage" then
 	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
@@ -417,14 +449,22 @@ local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000
 		end
 	end
 
+if GetCastName(myHero, _R) == "MissileBarrage2" then
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local RPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,200,1500,40,true,true)
+	if Config.R then
+		if CanUseSpell(myHero, _R) == READY and RPred.HitChance == 1 then
+	CastSkillShot(_R,RPred.PredPos.x,RPred.PredPos.y,RPred.PredPos.z)
+		end
+	end
 
 
+end
 end
 end
 end
 end)
-end]]
-
+end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -448,7 +488,29 @@ end]]
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "DrMundo" then
+-- Menu
+Config = scriptConfig("IDrMundo", "DrMundo")
+Config.addParam("Q", "Use DrMundo Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1100) then
+if IWalkConfig.Harass then
 
+-- Dr.Mundo Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,250,1050,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+end
+end
+end)
+end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -480,6 +542,41 @@ end]]
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Ezreal" then
+-- Menu
+Config = scriptConfig("IEzreal", "Ezreal")
+Config.addParam("Q", "Use Ezreal Q", SCRIPT_PARAM_ONOFF, true)
+Config.addParam("W", "Use Ezreal W", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1250) then
+if IWalkConfig.Harass then
+
+-- Ezreal Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),2000,250,1200,60,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+-- Ezreal W
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local WPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1600,250,1050,80,false,true)
+	if Config.W then
+		if CanUseSpell(myHero, _W) == READY and WPred.HitChance == 1 then
+	CastSkillShot(_W,WPred.PredPos.x,WPred.PredPos.y,WPred.PredPos.z)
+		end
+	end
+end
+
+
+end
+end)
+end
+
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -648,7 +745,6 @@ end
 end
 end)
 end
-
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -864,6 +960,30 @@ end
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
+if GetObjectName(GetMyHero()) == "Thresh" then
+-- Menu
+Config = scriptConfig("IThresh", "Thresh")
+Config.addParam("Q", "Use Thresh Q", SCRIPT_PARAM_ONOFF, true)
+-- Start
+OnLoop(function(myHero)
+local unit = GetCurrentTarget()
+if ValidTarget(unit, 1150) then
+if IWalkConfig.Harass then
+
+-- Thresh Q
+	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1900,500,1100,70,true,true)
+	if Config.Q then
+		if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 then
+	CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+		end
+	end
+
+
+end
+end
+end)
+end
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
