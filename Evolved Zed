@@ -20,7 +20,7 @@ if IWalkConfig.Combo then
 local unit = GetCurrentTarget()
 local currhp = GetCurrentHP(myHero)
 local buffcnt = GotBuff(unit,"DeathMark")
-if ValidTarget(unit, 900) then
+if ValidTarget(unit, 925) then
 
 if GetCastName(myHero, _R) ~= "ZedR2" then
 if Config.R then
