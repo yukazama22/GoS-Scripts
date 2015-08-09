@@ -1,11 +1,21 @@
+-- Menu
 Config = scriptConfig("IZed", "Zed.lua")
 Config.addParam("Q", "Use Q", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("E", "Use E", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("R", "Use R", SCRIPT_PARAM_ONOFF, true)
-
+-- PrintChat
+local info = "Evolved Zed Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.0"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
+-- Start
 OnLoop(function(myHero)
 AutoIgnite()
-DrawText("Evolved Zed is Loaded, and this is my first Script EVER",24,0,0,0xffff0000);
 if IWalkConfig.Combo then
 local unit = GetCurrentTarget()
 local currhp = GetCurrentHP(myHero)
@@ -15,7 +25,7 @@ if ValidTarget(unit, 900) then
 if GetCastName(myHero, _R) ~= "ZedR2" then
 if Config.R then
 if unit ~= nil then
-if CanUseSpell(myHero, _R) == READY and IsInDistance(unit, 625) then
+if CanUseSpell(myHero, _R) == READY and rdmg() > GetCurrentHP(unit) and IsInDistance(unit, 625) then
 CastTargetSpell(unit, _R)
 
 end
@@ -40,8 +50,7 @@ end
 end
 end
 end)
-
-
+end
 
 
 function qdmg()
@@ -100,5 +109,3 @@ function rdmg()
 		return 50 + (GetBonusDmg(myHero)/100*100) + qdmg() + edmg()
 	end
 end
-
-
