@@ -1,5 +1,6 @@
+if GetObjectName(GetMyHero()) == "Zed" then
 -- Menu
-Config = scriptConfig("IZed", "Zed.lua")
+Config = scriptConfig("IZed", "Zed")
 Config.addParam("Q", "Use Q", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("E", "Use E", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("R", "Use R", SCRIPT_PARAM_ONOFF, true)
@@ -20,7 +21,7 @@ if IWalkConfig.Combo then
 local unit = GetCurrentTarget()
 local currhp = GetCurrentHP(myHero)
 local buffcnt = GotBuff(unit,"DeathMark")
-if ValidTarget(unit, 925) then
+if ValidTarget(unit, 1000) then
 
 if GetCastName(myHero, _R) ~= "ZedR2" then
 if Config.R then
@@ -109,3 +110,4 @@ function rdmg()
 		return 50 + (GetBonusDmg(myHero)/100*100) + qdmg() + edmg()
 	end
 end
+
