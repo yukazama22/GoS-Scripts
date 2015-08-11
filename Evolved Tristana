@@ -1,3 +1,4 @@
+if GetObjectName(GetMyHero()) == "Tristana" then
 -- Requirements
 require('twgank')
 -- Keys
