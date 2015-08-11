@@ -8,7 +8,16 @@ Config.addParam("E", "Use Akali E", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("R", "Use Akali R", SCRIPT_PARAM_ONOFF, true)
 KSConfig = scriptConfig("KS", "Killsteal:")
 KSConfig.addParam("KSR", "Killsteal with R", SCRIPT_PARAM_ONOFF, false)
-
+-- PrintChat
+local info = "Evolved Akali Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.0"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
 -- Start
 OnLoop(function(myHero)
 AutoIgnite()
