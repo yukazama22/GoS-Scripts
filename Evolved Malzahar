@@ -1,13 +1,23 @@
-Config = scriptConfig("IMalzahar", "Malzahar.lua")
+if GetObjectName(GetMyHero()) == "Malzahar" then
+-- Menu
+Config = scriptConfig("IMalzahar", "Malzahar")
 Config.addParam("Q", "Use Q", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("W", "Use W", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("E", "Use E", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("R", "Use R", SCRIPT_PARAM_ONOFF, true)
-
-
+-- PrintChat
+local info = "Evolved Malzahar Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.0"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
+-- Start
 OnLoop(function(myHero)
 	AutoIgnite()
-	DrawText("Evolved Malzahar is Loaded.",24,0,0,0xffff0000);
 	if KeyIsDown(string.byte("C")) then
 		Harrass()
 	end
@@ -53,12 +63,9 @@ OnLoop(function(myHero)
 	end
 end
 end)
+end
 
-
-
-
-
-function Harrass()
+OnLoop(function(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
 
@@ -76,9 +83,7 @@ function Harrass()
 			end
 			end
 	end
-end
-
-
+end)
 
 OnProcessSpell(function(unit, spell)
 
