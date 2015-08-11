@@ -10,6 +10,16 @@ AutoConfig = scriptConfig("AU", "Automatic")
 AutoConfig.addParam("R", "Use Auto R", SCRIPT_PARAM_ONOFF, true)
 KSConfig = scriptConfig("KS", "Killsteal:")
 KSConfig.addParam("KSQ", "Killsteal with Q", SCRIPT_PARAM_ONOFF, false)
+-- PrintChat
+local info = "Evolved DrMundo Loaded"
+local upv = "Upvote if you like it!"
+local sig = "Made by Asserio"
+local ver = "v 1.0"
+textTable = {info,upv,sig,ver}
+PrintChat(textTable[1])
+PrintChat(textTable[2])
+PrintChat(textTable[3])
+PrintChat(textTable[4])
 -- Start
 OnLoop(function(myHero)
 AutoIgnite()
