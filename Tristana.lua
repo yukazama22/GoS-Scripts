@@ -12,11 +12,11 @@ local info = "Evolved Tristana Loaded"
 local upv = "Upvote if you like it!"
 local sig = "Made by Asserio"
 local ver = "v 1.0"
-textTable = {info,upv,sig,ver} 
+textTable = {info,upv,sig,ver}
 PrintChat(textTable[1])
 PrintChat(textTable[2])
 PrintChat(textTable[3])
-PrintChat(textTable[4]) 
+PrintChat(textTable[4])
 
 -- This is done every mil second
 OnLoop(function(myHero)
@@ -74,4 +74,5 @@ function rdmg()
 		return 500 + (GetBonusAP(myHero)/100*100)
 	end
 
+end
 end
