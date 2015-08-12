@@ -27,26 +27,26 @@ if IWalkConfig.Combo then
 local hp = GetCurrentHP(unit)
 local maxHP = GetMaxHP(unit)
 -- Darius E
-	-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+  -- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
 local EPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),math.huge,300,550,80,false,true)
-	if Config.E then
-		if CanUseSpell(myHero, _E) == READY and EPred.HitChance == 1 then
-			CastTargetSpell(unit, _E)
-		end
-	end
+  if Config.E then
+    if CanUseSpell(myHero, _E) == READY and EPred.HitChance == 1 then
+      CastTargetSpell(unit, _E)
+    end
+  end
 
 -- Darius Q
-if Config.Q then
-	if CanUseSpell(myHero, _Q) == READY and IsInDistance(unit, GetCastRange(myHero, _Q)) then
-		CastSpell(_Q)
-	end
-end
-
+ if Config.Q then
+ local QPred = GetPredictionForPlayer(GetMyHeroPos(),unit,GetMoveSpeed(unit),1700,250,475,50,true,true)
+                        if CanUseSpell(myHero, _Q) == READY and QPred.HitChance == 1 and IsInDistance(unit, 475) then
+                        CastSkillShot(_Q,QPred.PredPos.x,QPred.PredPos.y,QPred.PredPos.z)
+                        end
+                end
 -- Darius W
 if Config.W then
-	if CanUseSpell(myHero, _W) == READY and IsInDistance(unit, GetRange(myHero)) then
-		CastTargetSpell(myHero, _W)
-	end
+  if CanUseSpell(myHero, _W) == READY and IsInDistance(unit, GetRange(myHero)) then
+    CastTargetSpell(myHero, _W)
+  end
 end
 
 
@@ -57,11 +57,10 @@ end)
 
 function Killsteal()
         for i,enemy in pairs(GetEnemyHeroes()) do
-			-- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
+      -- GetPredictionForPlayer(startPosition, targetUnit, targetUnitMoveSpeed, spellTravelSpeed, spellDelay, spellRange, spellWidth, collision, addHitBox)
             if CanUseSpell(myHero, _R) == READY and ValidTarget(enemy,GetCastRange(myHero,_R)) and AutoRConfig.R and GetCurrentHP(enemy) < CalcDamage(myHero, enemy, 0,  (math.max(90*GetCastLevel(myHero,_R)+70+.75*GetBonusDmg(myHero),(90*GetCastLevel(myHero,_R)+70+.75*GetBonusDmg(myHero))*2))) then
-		CastTargetSpell(enemy, _R)
+    CastTargetSpell(enemy, _R)
             end
         end
 end
 end
-
