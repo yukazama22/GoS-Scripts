@@ -8,6 +8,7 @@ Config.addParam("W", "Use W", SCRIPT_PARAM_ONOFF, true)
 Config.addParam("E", "Use E", SCRIPT_PARAM_ONOFF, true)
 AutoConfig = scriptConfig("AU", "Automatic")
 AutoConfig.addParam("R", "Use Auto R", SCRIPT_PARAM_ONOFF, true)
+AutoConfig.addParam("W", "Auto W Turn Off", SCRIPT_PARAM_ONOFF, true)
 KSConfig = scriptConfig("KS", "Killsteal:")
 KSConfig.addParam("KSQ", "Killsteal with Q", SCRIPT_PARAM_ONOFF, false)
 -- PrintChat
@@ -25,6 +26,7 @@ OnLoop(function(myHero)
 AutoIgnite()
 Killsteal()
 AutoUltimate()
+WTurnOff()
 if IWalkConfig.Combo then
 local unit = GetCurrentTarget()
 if ValidTarget(unit, 1300) then
@@ -63,7 +65,7 @@ function AutoUltimate()
 	local maxHP = GetMaxHP(myHero)
 
 	if AutoConfig.R then
-		if CanUseSpell(myHero, _R) == READY and (hp/maxHP) < 0.6 then
+		if CanUseSpell(myHero, _R) == READY and EnemiesAround(GetMyHeroPos(), 600) >= 1 and (hp/maxHP) < 0.5 then
 	CastTargetSpell(myHero, _R)
 		end
 	end
@@ -79,4 +81,23 @@ local QPred = GetPredictionForPlayer(GetMyHeroPos(),enemy,GetMoveSpeed(enemy),20
             end
         end
 end
+
+
+function WTurnOff()
+	local unit = GetCurrentTarget()
+	if ValidTarget(unit, 1400) then
+
+-- Auto W Turn Off
+if AutoConfig.W then
+	if GotBuff(myHero, "BurningAgony") == 1 then
+	if CanUseSpell(myHero, _W) == READY and not IsInDistance(unit, GetCastRange(myHero, _W)) and EnemiesAround(GetMyHeroPos(), GetCastRange(myHero, _W)) then
+		CastTargetSpell(myHero, _W)
+	end
+	end
 end
+
+
+end
+end
+end
+
