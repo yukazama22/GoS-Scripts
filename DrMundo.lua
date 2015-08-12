@@ -90,7 +90,7 @@ function WTurnOff()
 -- Auto W Turn Off
 if AutoConfig.W then
 	if GotBuff(myHero, "BurningAgony") == 1 then
-	if CanUseSpell(myHero, _W) == READY and not IsInDistance(unit, GetCastRange(myHero, _W)) and EnemiesAround(GetMyHeroPos(), GetCastRange(myHero, _W)) then
+	if CanUseSpell(myHero, _W) == READY and not IsInDistance(unit, GetCastRange(myHero, _W)) then
 		CastTargetSpell(myHero, _W)
 	end
 	end
