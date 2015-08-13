@@ -18,14 +18,11 @@ PrintChat(textTable[4])
 -- Start
 OnLoop(function(myHero)
 	AutoIgnite()
-	if KeyIsDown(string.byte("C")) then
-		Harrass()
-	end
-	if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
 	if IWalkConfig.Combo then
 	local currmana = GetCurrentMana(myHero)
 	local unit = GetCurrentTarget()
-		if ValidTarget(unit, 1000) then
+	if ValidTarget(unit, 1000) then
+	if GetCurrentMana(myHero) >= qcost() + wcost() + ecost() + rcost() then
 			if Config.E then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
 			if isRcasting then return end
@@ -68,6 +65,7 @@ end
 OnLoop(function(myHero)
 	local unit = GetCurrentTarget()
 		if ValidTarget(unit, 1000) then
+	if IWalkConfig.Harass then
 
 		if Config.E then
 			if CanUseSpell(myHero, _E) == READY and GetCastRange(myHero, _E) then
@@ -83,6 +81,7 @@ OnLoop(function(myHero)
 			end
 			end
 	end
+end
 end)
 
 OnProcessSpell(function(unit, spell)
