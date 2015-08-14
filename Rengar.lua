@@ -79,7 +79,7 @@ if ValidTarget(unit, 1400) then
 		end
 	end
 -- Rengar Q
-	if Config.Q and (hp/maxhp) < 0.4 and (GetCurrentHP(unit)/GetMaxHP(unit)) < 0.3 and GetCurrentMana(myHero) == 5 then
+	if Config.Q and (hp/maxhp) > 0.4 and (GetCurrentHP(unit)/GetMaxHP(unit)) < 0.3 and GetCurrentMana(myHero) == 5 then
 		if CanUseSpell(myHero, _Q) == READY and IsInDistance(unit, GetCastRange(myHero, _Q)) then
 			CastSpell(_Q)
 		end
